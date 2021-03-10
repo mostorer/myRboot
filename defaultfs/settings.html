@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Sming Framework WiFi Network configuration</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- build:css bootstrap-core.css -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <!-- endbuild -->
+    
+    <!-- build:js core.js -->
+    <script src="jquery.js"></script>
+    <!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<script>
+    $(document).ready(function () {
+        ToggleReadonlyWifi($('input[checked=checked]').val());
+        $('input[name=dhcp]').on('click', function(){
+            $('input[name=dhcp]').each(function(e){
+                $(e).removeAttr('checked');
+            })
+            $(this).attr('checked', 'checked');
+            ToggleReadonlyWifi($(this).val());
+        })
+    });
+
+    function ToggleReadonlyWifi(value){
+        if(value == '1'){
+            $('.wifi-control').each(function(){
+                $(this).attr('readonly', 'readonly');
+            })
+        }
+        else
+        {
+            $('.wifi-control').each(function(){
+                $(this).removeAttr('readonly');
+            })
+        }
+    }
+
+    $(document).ready(function () {
+        ToggleReadonlyMqtt($('input[checked=checked]').val());
+        $('input[name=mqtt]').on('click', function(){
+            $('input[name=mqtt]').each(function(e){
+                $(e).removeAttr('checked');
+            })
+            $(this).attr('checked', 'checked');
+            ToggleReadonlyMqtt($(this).val());
+        })
+    });
+
+    function ToggleReadonlyMqtt(value){
+        if(value == '1'){
+            $('.mqtt-control').each(function(){
+                $(this).attr('readonly', 'readonly');
+            })
+        }
+        else
+        {
+            $('.mqtt-control').each(function(){
+                $(this).removeAttr('readonly');
+            })
+        }
+    }
+</script>
+
+<body>
+
+<div class="container">
+    <div class="header">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="/">Networks</a></li>
+                <li role="presentation" class="active"><a href="/ipconfig">Settings</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">HTsense</h3>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Network Settings</h1>
+        <p class="lead">Wireless network connection
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+		<div class="alert alert-warning" role="alert">Saving changes will reboot the device</div>
+        <h2>Settings</h2>
+            <form method="post" action="">
+                <fieldset>
+                    <legend>IP Address</legend>
+                    <div class="col-md-offset-2">
+                        <div class="wifi-group">
+                            <label>Use DHCP</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" value="1" name="dhcp" {dhcpon}> Yes
+                                </label>
+                                <label>
+                                    <input type="radio" value="0" name="dhcp" {dhcpoff}> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="wifi-group">
+                            <label>IP Address</label>
+                            <input class="wifi-control" style="width: 250px" type="text" name="ip" value="{ip}">
+                        </div>
+                        <div class="wifi-group">
+                            <label>Network Mask</label>
+                            <input class="wifi-control" style="width: 250px" type="text" name="netmask" value="{netmask}">
+                        </div>
+                        <div class="wifi-group">
+                            <label>Gateway</label>
+                            <input class="wifi-control" style="width: 250px" type="text" name="gateway" value="{gateway}">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Mqtt Server</legend>
+                    <div class="col-md-offset-2">
+                        <div class="mqtt-group">
+                            <label>Use MQTT</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" value="0" name="mqtt" {mqtton}> Yes
+                                </label>
+                                <label>
+                                    <input type="radio" value="1" name="mqtt" {mqttoff}> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mqtt-group">
+                            <label>MQTT Server Url</label>
+                            <input class="mqtt-control" style="width: 250px" type="text" name="mqtturl" value="{mqtturl}">
+                        </div>
+                        <div class="mqtt-group">
+                            <label>MQTT Id</label>
+                            <input class="mqtt-control" style="width: 250px" type="text" name="mqttid" value="{mqttid}">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-md-offset-3">
+                    <input type="submit" class="btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <!--<p>&copy; Company 2014</p>-->
+    </footer>
+
+</div> <!-- /container -->
+</body>
+</html>
