@@ -1,0 +1,8 @@
+CREATE clib-App-f5fe8d156ca2844420c9ce2453624c8b.a
+ADDMOD app/application.o
+ADDMOD Components/rboot/rboot/appcode/rboot-api.o
+ADDMOD Components/rboot/rboot/appcode/rboot-bigflash.o
+ADDMOD Arch/Esp8266/Components/gdbstub/appcode/gdbstub-entry.o
+ADDMOD Arch/Esp8266/Components/gdbstub/appcode/gdb_hooks.o
+SAVE
+END

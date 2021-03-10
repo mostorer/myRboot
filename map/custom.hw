@@ -1,0 +1,65 @@
+{
+	"name": "Two ROM with Hybrid FS in 1M standard",
+	"comment": "Should work with any Esp8266 variant",
+	"arch": "Esp8266",
+	"partition_table_offset": "0x2000",
+	"devices": {
+		"spiFlash": {
+			"type": "flash",
+			"size": "1M",
+			"mode": "dio",
+			"speed": 40
+		}
+	},
+	"partitions": {
+		"phy_init": {
+			"address": "0x003000",
+			"size": "4K",
+			"type": "data",
+			"subtype": "phy",
+			"filename": "$(FLASH_INIT_DATA)"
+		},
+		"sys_param": {
+			"address": "0x004000",
+			"size": "16K",
+			"type": "data",
+			"subtype": "sysparam"
+		},
+		"rom0": {
+			"address": "0x008000",
+			"size": "440K",
+			"type": "app",
+			"subtype": "factory",
+			"filename": "$(RBOOT_ROM_0_BIN)"
+		},
+		"spiffsOvl": {
+			"address": "0x076000",
+            "size": "40K",
+			"type": "data",
+			"subtype": "spiffs",
+			"filename": "$(SPIFF_BIN_OUT)",
+			"build": {
+				"target": "spiffsgen",
+				"files": "$(SPIFF_FILES)"
+			}
+		},
+		"rom1": {
+			"address": "0x080000",
+            "size": "440K",
+			"type": "app",
+			"subtype": "ota_0",
+			"filename": "$(RBOOT_ROM_1_BIN)"
+		},
+		"fwfs0v1": {
+			"address": "0x0EE000",
+            "size": "72K",
+			"type": "data",
+			"subtype": "fwfs",
+			"filename": "$(PROJECT_DIR)/out/fwfs_rom.bin",
+			"build": {
+				"target": "fwfs-build",
+				"config": "$(FWFS_IMAGE)"
+			}
+		}
+	}
+}
