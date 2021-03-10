@@ -51,8 +51,8 @@
 			"filename": "$(RBOOT_ROM_1_BIN)"
 		},
 		"fwfs0v1": {
-			"address": "0x0EE000",
-            "size": "72K",
+			"address": "0x0F0000",
+            "size": "64K",
 			"type": "data",
 			"subtype": "fwfs",
 			"filename": "$(PROJECT_DIR)/out/fwfs_rom.bin",
